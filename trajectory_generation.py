@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 from lib.trajectory import Trajectory
-from main import ik, dk
+from inverse_velocity_kinematics import ik, dk
 
 
 plt.style.use([
@@ -18,8 +18,8 @@ plt.style.use([
 lmbd_start = 1
 lmbd_end = 1
 
-start_transformation = np.array([.892, .0, 1.17, 0, 0, 0])
-desired_transformation = np.array([.58595, -.58595, .25097, 0, 0, 0])
+start_transformation = np.array([892.07, .0, 1170, 0, 0, 0])
+desired_transformation = np.array([585.95, -585.95, 250.97, 0, 0, 0])
 
 start_time = time.time()
 
@@ -29,11 +29,11 @@ end_angles, se = ik(desired_transformation)
 while not (ss and se):
   if not ss:
     lmbd_start += .1
-    start_angles, ss = ik(start_transformation, lmbd=lmbd_start, method='pinv')
+    start_angles, ss = ik(start_transformation, lmbd=lmbd_start)
 
   if not se:
     lmbd_end += .1
-    end_angles, se = ik(desired_transformation, lmbd=lmbd_end, method='pinv')
+    end_angles, se = ik(desired_transformation, lmbd=lmbd_end)
 
 end_time = time.time()
 

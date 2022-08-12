@@ -43,10 +43,6 @@ def arbitrary_vector_rotation_matrix(theta, v):
 	return np.eye(4) + np.sin(theta) * su + (1 - np.cos(theta)) * (su @ su)
 
 
-def g_inv(theta, w):
-	return ((1 / theta) * np.eye(3)) - w / 2 + (1 / theta - .5 * (np.cot(theta / 2))) * (w @ w)
-
-
 def translation_matrix(dx, dy, dz):
 	return np.array([[1, 0, 0, dx], [0, 1, 0, dy], [0, 0, 1, dz], [0, 0, 0, 1]])
 
